@@ -25,6 +25,34 @@
 
 //#region   6. Using Custom Pipes to Perform Custom Transformations 
 
+// import { Pipe, PipeTransform } from "@angular/core";
+
+// @Pipe({
+//     name:'temp',
+// })
+
+// export class TemperaturePipe implements PipeTransform{
+    
+//     transform(value:string | number)
+//     {
+//         let val:number;
+//         if(typeof value === 'string'){
+//             val = parseFloat(value)
+//         }
+//         else{
+//             val = value;
+//         }
+//         const outputTmep = val * (9/5) + 32;
+//         return `${outputTmep} *F`;
+//     }
+// }
+
+//#endregion
+
+
+
+//#region  7. Accepting Parameters in Custom Pipes
+
 import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
@@ -32,8 +60,7 @@ import { Pipe, PipeTransform } from "@angular/core";
 })
 
 export class TemperaturePipe implements PipeTransform{
-    
-    transform(value:string | number)
+    transform(value:string | number, inputType: 'cel' | 'fah', outputType?: 'cel' | 'fah')
     {
         let val:number;
         if(typeof value === 'string'){
@@ -42,9 +69,29 @@ export class TemperaturePipe implements PipeTransform{
         else{
             val = value;
         }
-        const outputTmep = val * (9/5) + 32;
-        return `${outputTmep} *F`;
+
+        let outputTmep:number;
+        if(inputType === 'cel' && outputType === 'fah'){
+            outputTmep = val * (9/5) + 32; // cel to f
+        }else if(inputType === 'fah' && outputType ==='cel'){
+            outputTmep = (val-32) * (5/9);  // f to  cel
+        }
+        else{
+            outputTmep = val;
+        }
+
+
+        let symbol : 'C' | 'F';
+        if(!outputType){
+            symbol = inputType === 'cel' ? 'C' : 'F';
+        }
+        else{
+            symbol = inputType === 'cel' ? 'C' : 'F';
+        }
+        return `${outputTmep} ${symbol}`;
     }
 }
 
 //#endregion
+
+
