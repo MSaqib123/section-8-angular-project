@@ -68,10 +68,11 @@ import { DatePipe, DecimalPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TemperaturePipe } from './temperature.pipe';
+import { SortPipe } from './sort.pipe';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,DatePipe,DecimalPipe,TemperaturePipe],
+  imports: [RouterOutlet,DatePipe,DecimalPipe,TemperaturePipe,SortPipe],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
