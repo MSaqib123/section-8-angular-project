@@ -53,6 +53,51 @@
 
 //#region  7. Accepting Parameters in Custom Pipes
 
+// import { Pipe, PipeTransform } from "@angular/core";
+
+// @Pipe({
+//     name:'temp',
+// })
+
+// export class TemperaturePipe implements PipeTransform{
+//     transform(value:string | number, inputType: 'cel' | 'fah', outputType?: 'cel' | 'fah')
+//     {
+//         let val:number;
+//         if(typeof value === 'string'){
+//             val = parseFloat(value)
+//         }
+//         else{
+//             val = value;
+//         }
+
+//         let outputTmep:number;
+//         if(inputType === 'cel' && outputType === 'fah'){
+//             outputTmep = val * (9/5) + 32; // cel to f
+//         }else if(inputType === 'fah' && outputType ==='cel'){
+//             outputTmep = (val-32) * (5/9);  // f to  cel
+//         }
+//         else{
+//             outputTmep = val;
+//         }
+
+
+//         let symbol : 'C' | 'F';
+//         if(!outputType){
+//             symbol = inputType === 'cel' ? 'C' : 'F';
+//         }
+//         else{
+//             symbol = inputType === 'cel' ? 'C' : 'F';
+//         }
+//         return `${outputTmep} ${symbol}`;
+//     }
+// }
+
+//#endregion
+
+
+
+//#region  8. Chaining Pipes & Being Aware of Limitations
+
 import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
@@ -60,8 +105,12 @@ import { Pipe, PipeTransform } from "@angular/core";
 })
 
 export class TemperaturePipe implements PipeTransform{
-    transform(value:string | number, inputType: 'cel' | 'fah', outputType?: 'cel' | 'fah')
+    transform(value:string | number | null, inputType: 'cel' | 'fah', outputType?: 'cel' | 'fah')
     {
+        if(!value){
+            return value;
+        }
+
         let val:number;
         if(typeof value === 'string'){
             val = parseFloat(value)
@@ -88,7 +137,7 @@ export class TemperaturePipe implements PipeTransform{
         else{
             symbol = inputType === 'cel' ? 'C' : 'F';
         }
-        return `${outputTmep} ${symbol}`;
+        return `${outputTmep.toFixed(2)} ${symbol}`;
     }
 }
 
