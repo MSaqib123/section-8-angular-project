@@ -30,13 +30,13 @@
 
 
 //#region  3. Using Built-in Pipes
-import { DatePipe } from '@angular/common';
+import { DatePipe, DecimalPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,DatePipe],
+  imports: [RouterOutlet,DatePipe,DecimalPipe],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
